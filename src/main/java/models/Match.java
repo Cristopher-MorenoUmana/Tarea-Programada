@@ -1,11 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author neynm
- */
 @Entity
 @Table(name = "TBL_MATCH")
 @NamedQueries({
@@ -34,18 +27,12 @@ import javax.persistence.Table;
 public class Match implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "MTH_ID")
-    private BigDecimal mthId;
-    @Basic(optional = false)
-    @Column(name = "MTH_SCORE_TEAM1")
-    private short mthScoreTeam1;
-    @Basic(optional = false)
-    @Column(name = "MTH_SCORE_TEAM2")
-    private short mthScoreTeam2;
+    private Integer mthId;
     @Basic(optional = false)
     @Column(name = "MTH_STATE")
     private String mthState;
@@ -58,42 +45,50 @@ public class Match implements Serializable {
     @JoinColumn(name = "MTH_TEAM2", referencedColumnName = "TEAM_ID")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Team mthTeam2;
+    @Basic(optional = false)
+    @Column(name = "MTH_SCORE_TEAM1")
+    private Integer mthScoreTeam1;
+    @Basic(optional = false)
+    @Column(name = "MTH_SCORE_TEAM2")
+    private Integer mthScoreTeam2;
+    @OneToMany(mappedBy = "pctMthId", fetch = FetchType.EAGER)
+    private Collection<Participation> participationCollection;
 
     public Match() {
     }
 
-    public Match(BigDecimal mthId) {
+    public Match(Integer mthId) {
         this.mthId = mthId;
     }
 
-    public Match(BigDecimal mthId, short mthScoreTeam1, short mthScoreTeam2, String mthState) {
+    public Match(Integer mthId, Integer mthScoreTeam1, Integer mthScoreTeam2, String mthState) {
         this.mthId = mthId;
         this.mthScoreTeam1 = mthScoreTeam1;
         this.mthScoreTeam2 = mthScoreTeam2;
         this.mthState = mthState;
     }
 
-    public BigDecimal getMthId() {
+    public Integer getMthId() {
         return mthId;
     }
 
-    public void setMthId(BigDecimal mthId) {
+    public void setMthId(Integer mthId) {
         this.mthId = mthId;
     }
 
-    public short getMthScoreTeam1() {
+    public Integer getMthScoreTeam1() {
         return mthScoreTeam1;
     }
 
-    public void setMthScoreTeam1(short mthScoreTeam1) {
+    public void setMthScoreTeam1(Integer mthScoreTeam1) {
         this.mthScoreTeam1 = mthScoreTeam1;
     }
 
-    public short getMthScoreTeam2() {
+    public Integer getMthScoreTeam2() {
         return mthScoreTeam2;
     }
 
-    public void setMthScoreTeam2(short mthScoreTeam2) {
+    public void setMthScoreTeam2(Integer mthScoreTeam2) {
         this.mthScoreTeam2 = mthScoreTeam2;
     }
 
@@ -138,20 +133,24 @@ public class Match implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Match)) {
             return false;
         }
         Match other = (Match) object;
-        if ((this.mthId == null && other.mthId != null) || (this.mthId != null && !this.mthId.equals(other.mthId))) {
-            return false;
-        }
-        return true;
+        return !((this.mthId == null && other.mthId != null) || (this.mthId != null && !this.mthId.equals(other.mthId)));
     }
 
     @Override
     public String toString() {
         return "models.Match[ mthId=" + mthId + " ]";
+    }
+
+    public Collection<Participation> getParticipationCollection() {
+        return participationCollection;
+    }
+
+    public void setParticipationCollection(Collection<Participation> participationCollection) {
+        this.participationCollection = participationCollection;
     }
     
 }

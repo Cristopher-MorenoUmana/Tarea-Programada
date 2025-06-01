@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,10 +14,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/**
- *
- * @author neynm
- */
 @Entity
 @Table(name = "TBL_PARTICIPATION")
 @NamedQueries({
@@ -34,18 +24,21 @@ import javax.persistence.Table;
 public class Participation implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "PCT_ID")
-    private BigDecimal pctId;
+    private Integer pctId;
     @Basic(optional = false)
     @Column(name = "PCT_POINTS")
-    private BigInteger pctPoints;
+    private Integer pctPoints;
     @Basic(optional = false)
     @Column(name = "PCT_POSITION")
-    private BigInteger pctPosition;
+    private Integer pctPosition;
+    @JoinColumn(name = "PCT_MTH_ID", referencedColumnName = "MTH_ID")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Match pctMthId;
     @JoinColumn(name = "PCT_TEAM_ID", referencedColumnName = "TEAM_ID")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Team pctTeamId;
@@ -56,38 +49,46 @@ public class Participation implements Serializable {
     public Participation() {
     }
 
-    public Participation(BigDecimal pctId) {
+    public Participation(Integer pctId) {
         this.pctId = pctId;
     }
 
-    public Participation(BigDecimal pctId, BigInteger pctPoints, BigInteger pctPosition) {
+    public Participation(Integer pctId, Integer pctPoints, Integer pctPosition) {
         this.pctId = pctId;
         this.pctPoints = pctPoints;
         this.pctPosition = pctPosition;
     }
 
-    public BigDecimal getPctId() {
+    public Integer getPctId() {
         return pctId;
     }
 
-    public void setPctId(BigDecimal pctId) {
+    public void setPctId(Integer pctId) {
         this.pctId = pctId;
     }
 
-    public BigInteger getPctPoints() {
+    public Integer getPctPoints() {
         return pctPoints;
     }
 
-    public void setPctPoints(BigInteger pctPoints) {
+    public void setPctPoints(Integer pctPoints) {
         this.pctPoints = pctPoints;
     }
 
-    public BigInteger getPctPosition() {
+    public Integer getPctPosition() {
         return pctPosition;
     }
 
-    public void setPctPosition(BigInteger pctPosition) {
+    public void setPctPosition(Integer pctPosition) {
         this.pctPosition = pctPosition;
+    }
+
+    public Match getPctMthId() {
+        return pctMthId;
+    }
+
+    public void setPctMthId(Match pctMthId) {
+        this.pctMthId = pctMthId;
     }
 
     public Team getPctTeamId() {
@@ -115,15 +116,12 @@ public class Participation implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+
         if (!(object instanceof Participation)) {
             return false;
         }
         Participation other = (Participation) object;
-        if ((this.pctId == null && other.pctId != null) || (this.pctId != null && !this.pctId.equals(other.pctId))) {
-            return false;
-        }
-        return true;
+        return !((this.pctId == null && other.pctId != null) || (this.pctId != null && !this.pctId.equals(other.pctId)));
     }
 
     @Override

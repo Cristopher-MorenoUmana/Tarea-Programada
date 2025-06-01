@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,10 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author neynm
- */
 @Entity
 @Table(name = "TBL_TEAM")
 @NamedQueries({
@@ -36,50 +26,50 @@ import javax.persistence.Table;
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "TEAM_ID")
-    private BigDecimal teamId;
+    private Integer teamId;
     @Basic(optional = false)
     @Column(name = "TEAM_LOGO_URL")
     private String teamLogoUrl;
     @Basic(optional = false)
     @Column(name = "TEAM_NAME")
     private String teamName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mthTeam1", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mthTeam1", fetch = FetchType.EAGER)
     private Collection<Match> matchCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mthWinner", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mthWinner", fetch = FetchType.EAGER)
     private Collection<Match> matchCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mthTeam2", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mthTeam2", fetch = FetchType.EAGER)
     private Collection<Match> matchCollection2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pctTeamId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pctTeamId", fetch = FetchType.EAGER)
     private Collection<Participation> participationCollection;
     @JoinColumn(name = "TEAM_SPT_ID", referencedColumnName = "SPT_ID")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Sport teamSptId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trmWinnerId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "trmWinnerId", fetch = FetchType.EAGER)
     private Collection<Tournament> tournamentCollection;
 
     public Team() {
     }
 
-    public Team(BigDecimal teamId) {
+    public Team(Integer teamId) {
         this.teamId = teamId;
     }
 
-    public Team(BigDecimal teamId, String teamLogoUrl, String teamName) {
+    public Team(Integer teamId, String teamLogoUrl, String teamName) {
         this.teamId = teamId;
         this.teamLogoUrl = teamLogoUrl;
         this.teamName = teamName;
     }
 
-    public BigDecimal getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(BigDecimal teamId) {
+    public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
 
@@ -156,15 +146,12 @@ public class Team implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+
         if (!(object instanceof Team)) {
             return false;
         }
         Team other = (Team) object;
-        if ((this.teamId == null && other.teamId != null) || (this.teamId != null && !this.teamId.equals(other.teamId))) {
-            return false;
-        }
-        return true;
+        return !((this.teamId == null && other.teamId != null) || (this.teamId != null && !this.teamId.equals(other.teamId)));
     }
 
     @Override

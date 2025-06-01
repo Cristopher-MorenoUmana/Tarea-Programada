@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,10 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author neynm
- */
 @Entity
 @Table(name = "TBL_SPORT")
 @NamedQueries({
@@ -34,41 +24,40 @@ import javax.persistence.Table;
 public class Sport implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "SPT_ID")
-    private BigDecimal sptId;
+    private Integer sptId;
     @Basic(optional = false)
     @Column(name = "SPT_NAME")
     private String sptName;
     @Basic(optional = false)
     @Column(name = "SPT_BALL_URL")
     private String sptBallUrl;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamSptId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "teamSptId", fetch = FetchType.EAGER)
     private Collection<Team> teamCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trmSptId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "trmSptId", fetch = FetchType.EAGER)
     private Collection<Tournament> tournamentCollection;
 
     public Sport() {
     }
 
-    public Sport(BigDecimal sptId) {
+    public Sport(Integer sptId) {
         this.sptId = sptId;
     }
 
-    public Sport(BigDecimal sptId, String sptName, String sptBallUrl) {
+    public Sport(Integer sptId, String sptName, String sptBallUrl) {
         this.sptId = sptId;
         this.sptName = sptName;
         this.sptBallUrl = sptBallUrl;
     }
 
-    public BigDecimal getSptId() {
+    public Integer getSptId() {
         return sptId;
     }
 
-    public void setSptId(BigDecimal sptId) {
+    public void setSptId(Integer sptId) {
         this.sptId = sptId;
     }
 
@@ -113,15 +102,12 @@ public class Sport implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+
         if (!(object instanceof Sport)) {
             return false;
         }
         Sport other = (Sport) object;
-        if ((this.sptId == null && other.sptId != null) || (this.sptId != null && !this.sptId.equals(other.sptId))) {
-            return false;
-        }
-        return true;
+        return !((this.sptId == null && other.sptId != null) || (this.sptId != null && !this.sptId.equals(other.sptId)));
     }
 
     @Override
