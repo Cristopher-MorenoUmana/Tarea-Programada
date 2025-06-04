@@ -3,6 +3,7 @@ package models;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +25,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Team.findByTeamLogoUrl", query = "SELECT t FROM Team t WHERE t.teamLogoUrl = :teamLogoUrl"),
     @NamedQuery(name = "Team.findByTeamName", query = "SELECT t FROM Team t WHERE t.teamName = :teamName")})
 public class Team implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tttTeamId", fetch = FetchType.EAGER)
+    private Collection<TournamentTeam> tournamentTeamCollection;
 
     private static final long serialVersionUID = 1L;
     
@@ -65,6 +69,18 @@ public class Team implements Serializable {
         this.teamName = teamName;
     }
 
+    public Team(TeamDto pTeamDto){
+        
+        updateTeam(pTeamDto);
+    }
+    
+    public final void updateTeam(TeamDto pTeamDto){
+        
+        this.teamLogoUrl = pTeamDto.getLogoUrl();
+        this.teamName = pTeamDto.getName();
+        this.teamSptId = pTeamDto.getSport();
+    }
+        
     public Integer getTeamId() {
         return teamId;
     }
@@ -157,6 +173,14 @@ public class Team implements Serializable {
     @Override
     public String toString() {
         return "models.Team[ teamId=" + teamId + " ]";
+    }
+
+    public Collection<TournamentTeam> getTournamentTeamCollection() {
+        return tournamentTeamCollection;
+    }
+
+    public void setTournamentTeamCollection(Collection<TournamentTeam> tournamentTeamCollection) {
+        this.tournamentTeamCollection = tournamentTeamCollection;
     }
     
 }

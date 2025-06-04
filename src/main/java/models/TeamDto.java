@@ -2,19 +2,22 @@ package models;
 
 import java.util.Objects;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 public class TeamDto {
     
     private SimpleStringProperty id;
     private SimpleStringProperty logoUrl;
     private SimpleStringProperty name;
-
+    private ObjectProperty<Sport> sport;
     
     public TeamDto(){
         
         this.id = new SimpleStringProperty();
         this.logoUrl = new SimpleStringProperty();
         this.name = new SimpleStringProperty();
+        this.sport = new SimpleObjectProperty();
     }
     
     public TeamDto(Team team){
@@ -22,7 +25,20 @@ public class TeamDto {
         this();
         this.id.setValue(team.getTeamId().toString());
         this.logoUrl.setValue(team.getTeamLogoUrl());
-        this.name.set(team.getTeamName());
+        this.name.setValue(team.getTeamName());
+        this.sport.setValue(team.getTeamSptId());
+    }
+    
+    public Sport getSport(){
+        return this.sport.get();
+    }
+    
+    public ObjectProperty<Sport> sportProperty(){
+        return this.sport;
+    }
+    
+    public void setSport(Sport pSport){
+        this.sport.set(pSport);
     }
     
     public Integer getID() {

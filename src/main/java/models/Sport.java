@@ -53,6 +53,17 @@ public class Sport implements Serializable {
         this.sptBallUrl = sptBallUrl;
     }
 
+    public Sport(SportDto pSportDto){
+        
+        updateSport(pSportDto);
+    }
+    
+    public final void updateSport(SportDto pSportDto){
+        
+        this.sptBallUrl = pSportDto.getBallUrl();
+        this.sptName = pSportDto.getName();
+    }
+    
     public Integer getSptId() {
         return sptId;
     }

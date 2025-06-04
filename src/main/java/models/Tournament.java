@@ -3,6 +3,7 @@ package models;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +26,15 @@ import javax.persistence.Table;
     @NamedQuery(name = "Tournament.findByTrmTeamsQuantity", query = "SELECT t FROM Tournament t WHERE t.trmTeamsQuantity = :trmTeamsQuantity")})
 public class Tournament implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "TRM_TEAMS_QUANTITY")
+    private Integer trmTeamsQuantity;
+    @Basic(optional = false)
+    @Column(name = "TRM_MATCH_DURATION")
+    private Integer trmMatchDuration;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tttTrmId", fetch = FetchType.EAGER)
+    private Collection<TournamentTeam> tournamentTeamCollection;
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -35,9 +45,6 @@ public class Tournament implements Serializable {
     @Basic(optional = false)
     @Column(name = "TRM_NAME")
     private String trmName;
-    @Basic(optional = false)
-    @Column(name = "TRM_TEAMS_QUANTITY")
-    private Integer trmTeamsQuantity;
     @OneToMany(mappedBy = "pctTrmId", fetch = FetchType.EAGER)
     private Collection<Participation> participationCollection;
     @JoinColumn(name = "TRM_SPT_ID", referencedColumnName = "SPT_ID")
@@ -59,7 +66,20 @@ public class Tournament implements Serializable {
         this.trmName = trmName;
         this.trmTeamsQuantity = trmTeamsQuantity;
     }
-
+    
+    public Tournament(TournamentDto pTournamentDto){
+        updateTournament(pTournamentDto);
+    }
+    
+    public final void updateTournament(TournamentDto pTournamentDto){
+        
+        this.trmMatchDuration = Integer.valueOf(pTournamentDto.getMatchDuration());
+        this.trmName = pTournamentDto.getName();
+        this.trmSptId = pTournamentDto.getSport();
+        this.trmTeamsQuantity = Integer.valueOf(pTournamentDto.getTeamsQuantity());
+        this.trmWinnerId = pTournamentDto.getWinner();
+    }
+    
     public Integer getTrmId() {
         return trmId;
     }
@@ -127,6 +147,22 @@ public class Tournament implements Serializable {
     @Override
     public String toString() {
         return "models.Tournament[ trmId=" + trmId + " ]";
+    }
+
+    public Integer getTrmMatchDuration() {
+        return trmMatchDuration;
+    }
+
+    public void setTrmMatchDuration(Integer trmMatchDuration) {
+        this.trmMatchDuration = trmMatchDuration;
+    }
+
+    public Collection<TournamentTeam> getTournamentTeamCollection() {
+        return tournamentTeamCollection;
+    }
+
+    public void setTournamentTeamCollection(Collection<TournamentTeam> tournamentTeamCollection) {
+        this.tournamentTeamCollection = tournamentTeamCollection;
     }
     
 }

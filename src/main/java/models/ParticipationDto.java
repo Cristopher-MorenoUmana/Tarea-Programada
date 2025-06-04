@@ -10,18 +10,18 @@ public class ParticipationDto {
     private SimpleStringProperty id;
     private SimpleStringProperty points;
     private SimpleStringProperty position;
-    private ObjectProperty<Team> teamId;
-    private ObjectProperty<Tournament> tournamentId;
-    private ObjectProperty<Match> matchId;
+    private ObjectProperty<Team> team;
+    private ObjectProperty<Tournament> tournament;
+    private ObjectProperty<Match> match;
     
     public ParticipationDto() {
 
         this.id = new SimpleStringProperty();
         this.points = new SimpleStringProperty();
         this.position = new SimpleStringProperty();
-        this.teamId = new SimpleObjectProperty<>();
-        this.tournamentId = new SimpleObjectProperty<>();
-        this.matchId = new SimpleObjectProperty<>();
+        this.team = new SimpleObjectProperty<>();
+        this.tournament = new SimpleObjectProperty<>();
+        this.match = new SimpleObjectProperty<>();
     }
 
     public ParticipationDto(Participation participation) {
@@ -30,29 +30,29 @@ public class ParticipationDto {
         this.id.setValue(participation.getPctId().toString());
         this.points.setValue(participation.getPctPoints().toString());
         this.position.setValue(participation.getPctPosition().toString());
-        this.teamId.setValue(participation.getPctTeamId());
-        this.tournamentId.setValue(participation.getPctTrmId());
-        this.matchId.setValue(participation.getPctMthId());
+        this.team.setValue(participation.getPctTeamId());
+        this.tournament.setValue(participation.getPctTrmId());
+        this.match.setValue(participation.getPctMthId());
     }
 
     public void setId(String id) {
         this.id.set(id);
     }
 
-    public void setMatchId(Match pMatchId){
-        this.matchId.set(pMatchId);
+    public void setMatch(Match pMatch){
+        this.match.set(pMatch);
     }
     
     public String getPoints() {
         return points.get();
     }
 
-    public ObjectProperty<Match> matchIdProperty() {
-        return this.matchId;
+    public ObjectProperty<Match> matchProperty() {
+        return this.match;
     }
     
-    public Match getMatchId(){
-        return this.matchId.get();
+    public Match getMatch(){
+        return this.match.get();
     }
     
     public void setPoints(String points) {
@@ -79,28 +79,28 @@ public class ParticipationDto {
         return position;
     }
 
-    public Team getTeamId() {
-        return teamId.get();
+    public Team getTeam() {
+        return team.get();
     }
 
-    public void setTeamId(Team teamId) {
-        this.teamId.set(teamId);
+    public void setTeam(Team team) {
+        this.team.set(team);
     }
 
-    public ObjectProperty<Team> teamIdProperty() {
-        return teamId;
+    public ObjectProperty<Team> teamProperty() {
+        return team;
     }
 
-    public Tournament getTournamentId() {
-        return tournamentId.get();
+    public Tournament getTournament() {
+        return tournament.get();
     }
 
-    public void setTournamentId(Tournament tournamentId) {
-        this.tournamentId.set(tournamentId);
+    public void setTournament(Tournament tournament) {
+        this.tournament.set(tournament);
     }
 
-    public ObjectProperty<Tournament> tournamentIdProperty() {
-        return tournamentId;
+    public ObjectProperty<Tournament> tournamentProperty() {
+        return tournament;
     }
 
     public Integer getID() {
@@ -143,8 +143,8 @@ public class ParticipationDto {
 
         StringBuilder sb = new StringBuilder();
         sb.append("ParticipationDto{id=").append(this.id.get());
-        sb.append("Equipo=").append(this.teamId.get());
-        sb.append("Torneo=").append(this.tournamentId.get());
+        sb.append("Equipo=").append(this.team.get());
+        sb.append("Torneo=").append(this.tournament.get());
         sb.append(", posicion en el torneo=").append(this.position.get());
         sb.append(", puntos=").append(this.points.get());
         sb.append('}');

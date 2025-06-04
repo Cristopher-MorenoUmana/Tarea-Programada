@@ -7,6 +7,7 @@
     <class>models.Match</class>
     <class>models.Tournament</class>
     <class>models.Participation</class>
+    <class>models.TournamentTeam</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:FREE"/>
       <property name="javax.persistence.jdbc.user" value="CMORENO"/>

@@ -10,8 +10,9 @@ public class TournamentDto {
     private SimpleStringProperty id;
     private SimpleStringProperty name;
     private SimpleStringProperty teamsQuantity;
+    private SimpleStringProperty matchDuration;
     private ObjectProperty<Team> winner;
-    private ObjectProperty<Sport> sportId;
+    private ObjectProperty<Sport> sport;
 
     public TournamentDto() {
 
@@ -19,7 +20,8 @@ public class TournamentDto {
         this.name = new SimpleStringProperty();
         this.teamsQuantity = new SimpleStringProperty();
         this.winner = new SimpleObjectProperty();
-        this.sportId = new SimpleObjectProperty();
+        this.sport = new SimpleObjectProperty();
+        this.matchDuration = new SimpleStringProperty();
     }
 
     public TournamentDto(Tournament tournament) {
@@ -29,9 +31,22 @@ public class TournamentDto {
         this.name.setValue(tournament.getTrmName());
         this.teamsQuantity.setValue(tournament.getTrmTeamsQuantity().toString());
         this.winner.setValue(tournament.getTrmWinnerId());
-        this.sportId.setValue(tournament.getTrmSptId());
+        this.sport.setValue(tournament.getTrmSptId());
+        this.matchDuration.setValue(tournament.getTrmMatchDuration().toString());
     }
 
+    public String getMatchDuration(){
+        return this.matchDuration.get();
+    }
+    
+    public SimpleStringProperty matchDurationProperty(){
+        return this.matchDuration;
+    }
+    
+    public void setMatchDuration(String pMatchDuration){
+        this.matchDuration.setValue(pMatchDuration);
+    }
+    
     public Integer getID() {
         if (id.get() == null || id.get().isEmpty()) {
             return null;
@@ -71,12 +86,12 @@ public class TournamentDto {
         this.winner.set(winner);
     }
 
-    public Sport getSportId() {
-        return sportId.get();
+    public Sport getSport() {
+        return sport.get();
     }
 
-    public void setSportId(Sport sportId) {
-        this.sportId.set(sportId);
+    public void setSport(Sport sport) {
+        this.sport.set(sport);
     }
 
     public SimpleStringProperty idProperty() {
@@ -95,8 +110,8 @@ public class TournamentDto {
         return winner;
     }
 
-    public ObjectProperty<Sport> sportIdProperty() {
-        return sportId;
+    public ObjectProperty<Sport> sportProperty() {
+        return sport;
     }
 
     @Override
@@ -131,7 +146,7 @@ public class TournamentDto {
         sb.append(", nombre del torneo=").append(this.name.get());
         sb.append(", cantidad de equipos=").append(this.teamsQuantity.get());
         sb.append(", ganador=").append(this.winner.get());
-        sb.append(", tipo de deporte=").append(this.sportId.get());
+        sb.append(", tipo de deporte=").append(this.sport.get());
         sb.append('}');
         return sb.toString();
     }

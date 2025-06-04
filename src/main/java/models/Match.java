@@ -68,6 +68,21 @@ public class Match implements Serializable {
         this.mthState = mthState;
     }
 
+    public Match(MatchDto pMatchDto) {
+        
+        updateMatch(pMatchDto);
+    }
+    
+    public final void updateMatch(MatchDto pMatchDto){
+        
+        this.mthScoreTeam1 = Integer.valueOf(pMatchDto.getScoreTeam1());
+        this.mthScoreTeam2 = Integer.valueOf(pMatchDto.getScoreTeam2());
+        this.mthState = pMatchDto.getState();
+        this.mthTeam1 = pMatchDto.getTeam1();
+        this.mthTeam2 = pMatchDto.getTeam2();
+        this.mthWinner = pMatchDto.getWinner();
+    }
+    
     public Integer getMthId() {
         return mthId;
     }

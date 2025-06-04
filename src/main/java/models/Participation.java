@@ -59,6 +59,19 @@ public class Participation implements Serializable {
         this.pctPosition = pctPosition;
     }
 
+    public Participation(ParticipationDto pParticipationDto){
+        updateParticipation(pParticipationDto);
+    }
+    
+    public final void updateParticipation(ParticipationDto pParticipationDto){
+        
+        this.pctMthId = pParticipationDto.getMatch();
+        this.pctPoints = Integer.valueOf(pParticipationDto.getPoints());
+        this.pctTeamId = pParticipationDto.getTeam();
+        this.pctPosition = Integer.valueOf(pParticipationDto.getPosition());
+        this.pctTrmId = pParticipationDto.getTournament();
+    }
+    
     public Integer getPctId() {
         return pctId;
     }
