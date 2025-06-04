@@ -17,7 +17,7 @@ public class ParticipationDao {
     private final EntityManager em = EntityManagerHelper.getManager();
     private EntityTransaction et;
     
-    public Response getParticipationes() {
+    public Response getParticipations() {
 
         try {
 
