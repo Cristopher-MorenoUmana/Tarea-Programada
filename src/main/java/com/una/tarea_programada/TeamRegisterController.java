@@ -1,6 +1,7 @@
 package com.una.tarea_programada;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -45,7 +46,10 @@ public class TeamRegisterController {
     
     public void initialize() {
 
-        
-    }    
-    
+        updateWindowSize();
+    }
+      private void updateWindowSize() {
+
+        Platform.runLater(() -> App.getStage().sizeToScene());
+    }
 }

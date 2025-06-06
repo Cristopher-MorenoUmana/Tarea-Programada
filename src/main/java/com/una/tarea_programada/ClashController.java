@@ -7,6 +7,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.application.Platform;
+import javafx.fxml.Initializable;
+
 
 public class ClashController {
 
@@ -65,9 +68,6 @@ public class ClashController {
 
     private void updateWindowSize() {
 
-        double[] anchorPane = {this.mainAnchorPane.getMinWidth(), this.mainAnchorPane.getHeight()};
-
-        App.resizeWindow(anchorPane[0], anchorPane[1]);
+        Platform.runLater(() ->  App.getStage().sizeToScene());
     }
-
 }

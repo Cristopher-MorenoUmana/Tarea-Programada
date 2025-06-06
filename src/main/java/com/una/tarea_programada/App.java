@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class App extends Application {
@@ -18,7 +17,7 @@ public class App extends Application {
 
         App.stage = stage;
 
-        scene = new Scene(loadFXML("MainMenu"), 640, 480);
+        scene = new Scene(loadFXML("MainMenu"));
         stage.setScene(scene);
         stage.show();
     }
@@ -35,11 +34,8 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-    public static void resizeWindow(double pWidth, double pHeight) {
 
-        if (stage != null) {
-            stage.setWidth(pWidth);
-            stage.setHeight(pHeight);
-        }
+    public static Stage getStage() {
+        return stage;
     }
 }

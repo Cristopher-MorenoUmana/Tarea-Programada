@@ -1,6 +1,7 @@
 package com.una.tarea_programada;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -54,5 +55,15 @@ public class TournamentRegisterController {
     @FXML
     private void switchToAddTeam_TournamentMenu() throws IOException {
         App.setRoot("AddTeam_TournamentMenu");
+    }
+    
+        public void initialize() {
+
+        updateWindowSize();
+    }
+
+    private void updateWindowSize() {
+
+        Platform.runLater(() ->  App.getStage().sizeToScene());
     }
 }

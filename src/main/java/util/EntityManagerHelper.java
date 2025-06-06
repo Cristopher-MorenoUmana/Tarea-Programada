@@ -12,7 +12,7 @@ public class EntityManagerHelper {
 
     static {
         try {
-            emf = Persistence.createEntityManagerFactory("com.una_Laboratorio_3_Progra_ll_jar_1.0PU");
+            emf = Persistence.createEntityManagerFactory("com.una_Tarea_Programada_jar_1.0PU");
             em = emf.createEntityManager();
         } catch (ExceptionInInitializerError e) {
             throw e;
@@ -26,7 +26,7 @@ public class EntityManagerHelper {
 
     public static EntityManager getManager() {
         if (em == null) {
-            emf = Persistence.createEntityManagerFactory("com.una_Laboratorio_3_Progra_ll_jar_1.0PU");
+            emf = Persistence.createEntityManagerFactory("com.una_Tarea_Programada_jar_1.0PU");
             em = emf.createEntityManager();
         }
         return em;
