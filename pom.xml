@@ -76,7 +76,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.una.tarea_pogramada.App</mainClass>
+                    <mainClass>com.una.tarea_programada.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>

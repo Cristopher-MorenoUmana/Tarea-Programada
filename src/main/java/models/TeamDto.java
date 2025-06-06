@@ -17,7 +17,7 @@ public class TeamDto {
         this.id = new SimpleStringProperty();
         this.logoUrl = new SimpleStringProperty();
         this.name = new SimpleStringProperty();
-        this.sport = new SimpleObjectProperty();
+        this.sport = new SimpleObjectProperty<>();
     }
     
     public TeamDto(Team team){

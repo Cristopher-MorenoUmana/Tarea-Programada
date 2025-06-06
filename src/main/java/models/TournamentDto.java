@@ -19,8 +19,8 @@ public class TournamentDto {
         this.id = new SimpleStringProperty();
         this.name = new SimpleStringProperty();
         this.teamsQuantity = new SimpleStringProperty();
-        this.winner = new SimpleObjectProperty();
-        this.sport = new SimpleObjectProperty();
+        this.winner = new SimpleObjectProperty<>();
+        this.sport = new SimpleObjectProperty<>();
         this.matchDuration = new SimpleStringProperty();
     }
 
