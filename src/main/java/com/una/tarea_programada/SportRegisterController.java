@@ -4,7 +4,6 @@ import java.io.IOException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -42,12 +41,14 @@ public class SportRegisterController {
     @FXML
     private TableColumn<SportDto, Integer> idColumn;
 
+    @FXML
+    private TableColumn<SportDto, String> urlColumn;
+
     private String sportName = "", sportId = "", ballUrl = "";
     @FXML
     private TextField idTxtF;
     @FXML
     private Text successTxt;
-
     @FXML
     private Text failTxt;
     @FXML
@@ -252,9 +253,10 @@ public class SportRegisterController {
         
         Response response = service.listSports();
 
-        this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        this.idColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
-
+        this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        this.idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        this.urlColumn.setCellValueFactory(new PropertyValueFactory<>("ballUrl"));
+        
         if (response.getSuccess() == 'N') {
             System.out.println(response.getMessage() + response.getInternalMessage());
             return;

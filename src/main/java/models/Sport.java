@@ -57,7 +57,7 @@ public class Sport implements Serializable {
         
         updateSport(pSportDto);
     }
-    
+  
     public final void updateSport(SportDto pSportDto){
         
         this.sptBallUrl = pSportDto.getBallUrl();

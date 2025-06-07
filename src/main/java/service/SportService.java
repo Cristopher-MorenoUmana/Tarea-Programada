@@ -30,4 +30,8 @@ public class SportService {
         
         return userDao.getSports();
     }
+    
+    public Response getSportById(Integer id){
+        return userDao.getSport(id);
+    }
 }

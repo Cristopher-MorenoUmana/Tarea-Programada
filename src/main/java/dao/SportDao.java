@@ -7,6 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.TypedQuery;
 import models.Sport;
 import models.SportDto;
 import util.Response;
@@ -30,6 +33,29 @@ public class SportDao {
             Logger.getLogger(SportDao.class.getName()).log(Level.SEVERE, "Error al obtener los deportes", ex);
 
             return new Response('N', "Error al obtener los deportes", "getSports");
+        }
+    }
+    
+    public Response getSport(Integer id) {
+        
+        try {
+            TypedQuery<Sport> query = em.createNamedQuery("Sport.findBySptId", Sport.class);
+            query.setParameter("sptId", id);
+            
+            return new Response('S', "", "", "Deporte", query.getSingleResult());
+
+        } catch (NoResultException ex) {
+            
+            return new Response('N', "No existe un deporte con el id ingresado.", "getSport NoResultException, para el id [ " + id + "]");
+        } catch (NonUniqueResultException ex) {
+            
+            Logger.getLogger(SportDao.class.getName()).log(Level.SEVERE, "Ocurrio un error al consultar el deporte.", ex);
+            
+            return new Response('N', "Ocurrio un error al consultar el deporte.", "getSport NonUniqueResultException, para el id [ " + id + "]");
+        } catch (Exception ex) {
+            
+            Logger.getLogger(SportDao.class.getName()).log(Level.SEVERE, "Error obteniendo el deporte [" + id + "]", ex);
+            return new Response('N', "Error obteniendo el deporte.", "getSport " + ex.getMessage());
         }
     }
 

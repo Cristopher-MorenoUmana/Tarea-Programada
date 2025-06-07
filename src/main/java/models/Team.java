@@ -3,7 +3,6 @@ package models;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +15,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 @Table(name = "TBL_TEAM")
@@ -26,14 +26,14 @@ import javax.persistence.Table;
     @NamedQuery(name = "Team.findByTeamName", query = "SELECT t FROM Team t WHERE t.teamName = :teamName")})
 public class Team implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tttTeamId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tttTeamId", fetch = FetchType.EAGER)
     private Collection<TournamentTeam> tournamentTeamCollection;
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "team_seq_gen")
+    @SequenceGenerator(name = "team_seq_gen", sequenceName = "team_seq", allocationSize = 1)
     @Column(name = "TEAM_ID")
     private Integer teamId;
     @Basic(optional = false)

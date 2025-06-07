@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="480.0" prefWidth="640.0" styleClass="mainFxmlClass" stylesheets="@../../../CSS/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.una.tarea_programada.SportRegisterController">
+<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="480.0" prefWidth="690.0" styleClass="mainFxmlClass" stylesheets="@../../../CSS/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.una.tarea_programada.SportRegisterController">
    <children>
       <Button fx:id="deleteBtn" layoutX="206.0" layoutY="144.0" mnemonicParsing="false" prefWidth="70.0" text="Eliminar" />
       <Text disable="true" layoutX="169.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registro de deportes:">
@@ -59,10 +59,11 @@
       </VBox>
       <Button fx:id="editBtn" layoutX="31.0" layoutY="144.0" mnemonicParsing="false" prefWidth="70.0" text="Editar" />
       <Button fx:id="addBtn" layoutX="120.0" layoutY="144.0" mnemonicParsing="false" prefWidth="70.0" text="Agregar" />
-      <TableView fx:id="sportsTableView" layoutX="350.0" layoutY="131.0" prefHeight="218.0" prefWidth="242.0">
+      <TableView fx:id="sportsTableView" layoutX="314.0" layoutY="131.0" prefHeight="218.0" prefWidth="353.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="189.5999755859375" text="Nombre" />
           <TableColumn fx:id="idColumn" prefWidth="48.00006103515625" text="Id" />
+            <TableColumn fx:id="urlColumn" prefWidth="112.00002441406252" text="Url" />
         </columns>
       </TableView>
       <Text layoutX="101.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elija una accion:">
@@ -76,8 +77,8 @@
          </font>
       </Text>
       <Button fx:id="finishBtn" layoutX="122.0" layoutY="423.0" mnemonicParsing="false" prefWidth="70.0" text="Finalizar" />
-      <ImageView fx:id="ball_ImageView" fitHeight="83.0" fitWidth="87.0" layoutX="428.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
-      <Text disable="true" layoutX="314.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balon del ultimo deporte añadido o editado:">
+      <ImageView fx:id="ball_ImageView" fitHeight="83.0" fitWidth="87.0" layoutX="447.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
+      <Text disable="true" layoutX="334.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balon del ultimo deporte añadido o editado:">
          <font>
             <Font size="15.0" />
          </font>

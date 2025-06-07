@@ -33,6 +33,10 @@ public class TeamDto {
         return this.sport.get();
     }
     
+    public String getSportNameAndId(){
+        return "Nombre: " + this.sport.get().getSptName() + " ID: " + this.sport.get().getSptId();
+    }
+    
     public ObjectProperty<Sport> sportProperty(){
         return this.sport;
     }

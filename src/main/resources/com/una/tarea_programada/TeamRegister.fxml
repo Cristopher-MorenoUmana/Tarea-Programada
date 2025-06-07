@@ -5,52 +5,88 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" stylesheets="@../../../CSS/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.una.tarea_programada.TeamRegisterController">
+<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="600.0" prefWidth="891.0" styleClass="mainFxmlClass" stylesheets="@../../../CSS/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.una.tarea_programada.TeamRegisterController">
    <children>
-      <Text layoutX="255.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registro de equipos:">
+      <Text layoutX="282.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registro de equipos:">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
-      <VBox alignment="CENTER" layoutX="64.0" layoutY="161.0" prefHeight="241.0" prefWidth="231.0">
+      <VBox fx:id="fieldsVbox" alignment="CENTER" disable="true" layoutX="44.0" layoutY="225.0" prefHeight="241.0" prefWidth="231.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre del equipo:" />
-            <TextField fx:id="teamTxtF" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre del equipo:">
+               <font>
+                  <Font size="15.0" />
+               </font></Text>
+            <TextField fx:id="nameTxtF" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Url del logo:">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Text>
             <TextField fx:id="logoUrlTxtF" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deporte:">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del deporte:">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Text>
-            <TextField />
-            <Text fx:id="idTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+            <TextField fx:id="sportIdTxtF" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID del equipo:">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Text>
             <TextField fx:id="idTxtF" />
          </children>
       </VBox>
-      <Button fx:id="deleteBtn" layoutX="272.0" layoutY="475.0" mnemonicParsing="false" prefWidth="70.0" text="Eliminar" />
-      <Button fx:id="addBtn" layoutX="366.0" layoutY="475.0" mnemonicParsing="false" prefWidth="70.0" text="Agregar" />
-      <Button fx:id="editBtn" layoutX="457.0" layoutY="475.0" mnemonicParsing="false" prefWidth="70.0" text="Editar" />
-      <TableView fx:id="sportsTableView" layoutX="386.0" layoutY="161.0" prefHeight="242.0" prefWidth="380.0">
+      <Button fx:id="deleteBtn" layoutX="30.0" layoutY="148.0" mnemonicParsing="false" prefWidth="70.0" text="Eliminar" />
+      <Button fx:id="addBtn" layoutX="124.0" layoutY="148.0" mnemonicParsing="false" prefWidth="70.0" text="Agregar" />
+      <Button fx:id="editBtn" layoutX="215.0" layoutY="148.0" mnemonicParsing="false" prefWidth="70.0" text="Editar" />
+      <TableView fx:id="teamsTableView" layoutX="321.0" layoutY="170.0" prefHeight="242.0" prefWidth="537.0">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="166.4000244140625" text="Nombre" />
-          <TableColumn fx:id="sportColumn" prefWidth="124.79998779296875" text="Deporte" />
-            <TableColumn fx:id="idColumn" minWidth="0.0" prefWidth="85.59991455078125" text="ID" />
+          <TableColumn fx:id="nameColumn" prefWidth="152.800048828125" text="Nombre" />
+          <TableColumn fx:id="sportColumn" prefWidth="136.0" text="Deporte" />
+            <TableColumn fx:id="idColumn" minWidth="0.0" prefWidth="82.39996337890625" text="ID" />
+            <TableColumn fx:id="logoColumn" prefWidth="160.800048828125" text="Url del logo" />
         </columns>
       </TableView>
       <Button fx:id="backBtn" layoutX="30.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="49.0" prefWidth="67.0" text="Regresar" />
+      <Text fx:id="successTxt" layoutX="55.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operacion realizada con exito" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="failTxt" layoutX="97.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operacion fallida" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="logoImageView" fitHeight="105.0" fitWidth="141.0" layoutX="484.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="399.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logo del ultimo equipo agregado o editado:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="103.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Elija una accion:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="finishBtn" layoutX="125.0" layoutY="509.0" mnemonicParsing="false" text="Finalizar" />
    </children>
 </AnchorPane>
